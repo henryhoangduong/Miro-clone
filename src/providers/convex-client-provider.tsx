@@ -1,4 +1,5 @@
 "use client";
+import { Loading } from "@/components/auth/loading";
 import { ClerkProvider, SignInButton, useAuth } from "@clerk/nextjs";
 import {
   Authenticated,
@@ -27,7 +28,7 @@ export const ConvexClientProvider = ({
           <SignInButton />
         </Unauthenticated>
         <AuthLoading>
-          <Loader2 className="animate-spin" />
+          <Loading/>
         </AuthLoading>
       </ConvexProviderWithClerk>
     </ClerkProvider>
