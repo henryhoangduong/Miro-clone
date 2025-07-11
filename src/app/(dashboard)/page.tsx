@@ -1,10 +1,23 @@
+"use client";
 import React from "react";
 import { EmptyOrg } from "./_components/empty-org";
-
-const DashBoardPage = () => {
+import { useOrganization } from "@clerk/nextjs";
+import BoardList from "./_components/board-list";
+interface DashBoardPageProps {
+  searchParams: {
+    search?: string;
+    favorites?: string;
+  };
+}
+const DashBoardPage = ({ searchParams }: DashBoardPageProps) => {
+  const { organization } = useOrganization();
   return (
     <div className=" flex-1 h-[calc(100%-80px)] p-6/Users/mac/Downloads/Saly-27.svg">
-      <EmptyOrg />
+      {!organization ? (
+        <EmptyOrg />
+      ) : (
+        <BoardList orgId={organization.id} query={searchParams} />
+      )}
     </div>
   );
 };

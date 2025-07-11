@@ -28,7 +28,7 @@ export const ConvexClientProvider = ({
           <SignInButton />
         </Unauthenticated>
         <AuthLoading>
-          <Loading/>
+          <Loading />
         </AuthLoading>
       </ConvexProviderWithClerk>
     </ClerkProvider>
