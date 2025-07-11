@@ -1,13 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { api } from "../../../../convex/_generated/api";
-import { useMutation } from "convex/react";
 import { useOrganization } from "@clerk/nextjs";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 export const EmptyBoard = () => {
-  const create = useMutation(api.board.create);
   const { organization } = useOrganization();
   const { pending, mutate } = useApiMutation(api.board.create);
 
