@@ -30,7 +30,7 @@ export const ConfirmModal = ({
     onConfirm();
   };
   return (
-    <AlertDialog >
+    <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
