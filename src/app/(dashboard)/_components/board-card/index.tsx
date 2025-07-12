@@ -7,7 +7,7 @@ import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "@clerk/nextjs";
 import Footer from "./footer";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Actions } from "../actions";
+import { Actions } from "../../../../components/actions";
 import { MoreHorizontal } from "lucide-react";
 interface BoardCardProps {
   id: string;
