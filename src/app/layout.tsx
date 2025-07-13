@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { ModalProvider } from "@/providers/modal-provider";
+import LiveblocksProvider_ from "@/providers/liveblocks-provider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,7 +33,7 @@ export default function RootLayout({
         <ConvexClientProvider>
           <Toaster />
           <ModalProvider />
-          {children}
+          <LiveblocksProvider_>{children}</LiveblocksProvider_>
         </ConvexClientProvider>
       </body>
     </html>
