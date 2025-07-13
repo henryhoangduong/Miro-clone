@@ -58,10 +58,10 @@ export const RenameModal = () => {
                 Cancel
               </Button>
             </DialogClose>
-              <Button disabled={pending} type="submit">
-                {pending && <Loader2 className="animate-spin" />}
-                Save
-              </Button>
+            <Button disabled={pending} type="submit">
+              {pending && <Loader2 className="animate-spin" />}
+              Save
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
