@@ -5,10 +5,11 @@ import { useOrganization } from "@clerk/nextjs";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 export const EmptyBoard = () => {
   const { organization } = useOrganization();
   const { pending, mutate } = useApiMutation(api.board.create);
-
+  const router = useRouter();
   const onClick = () => {
     if (!organization) return;
     mutate({
@@ -17,6 +18,7 @@ export const EmptyBoard = () => {
     })
       .then((id) => {
         toast.success("Board created");
+        router.push(`board/${id}`);
       })
       .catch(() => toast.error("Failed to create board"));
   };

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { EmptySearch } from "./empty-search";
 import { EmptyFavorites } from "./empty-favorites";
 import { EmptyBoard } from "./empty-board";
@@ -11,7 +11,7 @@ interface BoardListProps {
   orgId: string;
   query: {
     search?: string;
-    favorite?: string;
+    favorites?: string;
   };
 }
 const BoardList = ({ orgId, query }: BoardListProps) => {
@@ -21,7 +21,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
       <div>
         {" "}
         <h2 className="text-3xl">
-          {query.favorite ? "Favorite boards" : "Team boards"}
+          {query.favorites ? "Favorite boards" : "Team boards"}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
           <NewBoardButton orgId={orgId} />
@@ -37,7 +37,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
   if (!data?.length && query.search) {
     return <EmptySearch />;
   }
-  if (!data?.length && query.favorite) {
+  if (!data?.length && query.favorites) {
     return <EmptyFavorites />;
   }
   if (!data.length) {
@@ -46,7 +46,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
   return (
     <div className="p-6">
       <h2 className="text-3xl">
-        {query.favorite ? "Favorite boards" : "Team boards"}
+        {query.favorites ? "Favorite boards" : "Team boards"}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-8 pb-10">
         <NewBoardButton orgId={orgId} />
