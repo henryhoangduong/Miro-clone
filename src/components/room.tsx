@@ -1,6 +1,7 @@
 "use client";
 import React, { ReactNode } from "react";
-import { RoomProvider, ClientSideSuspense } from "@liveblocks/react/suspense";
+import { RoomProvider, ClientSideSuspense } from "@liveblocks/react";
+import { useSelf } from "@liveblocks/react";
 interface RoomProps {
   children: ReactNode;
   roomId: string;
