@@ -28,9 +28,19 @@ export const create = mutation({
 export const remove = mutation({
   args: { id: v.id("boards") },
   handler: async (ctx, args) => {
-    const identity = ctx.auth.getUserIdentity();
+    const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Unauthorized");
+    }
+    const userId = identity.subject;
+    const exisitingFavorite = await ctx.db
+      .query("userFavorites")
+      .withIndex("by_user_board_org", (q) =>
+        q.eq("userId", userId).eq("boardId", args.id),
+      )
+      .unique();
+    if (exisitingFavorite) {
+      await ctx.db.delete(exisitingFavorite._id);
     }
     await ctx.db.delete(args.id);
   },
