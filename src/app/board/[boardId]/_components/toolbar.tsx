@@ -64,7 +64,7 @@ const Toolbar = ({
         <ToolButton
           Icon={StickyNote}
           label="Sticky note"
-           onClick={() => {
+          onClick={() => {
             setCanvasState({
               mode: CanvasMode.Inserting,
               layerType: LayerType.Note,
@@ -78,7 +78,7 @@ const Toolbar = ({
         <ToolButton
           Icon={Square}
           label="Rectangle"
-           onClick={() => {
+          onClick={() => {
             setCanvasState({
               mode: CanvasMode.Inserting,
               layerType: LayerType.Rectangle,
@@ -92,7 +92,7 @@ const Toolbar = ({
         <ToolButton
           Icon={Circle}
           label="Ellipse"
-           onClick={() => {
+          onClick={() => {
             setCanvasState({
               mode: CanvasMode.Inserting,
               layerType: LayerType.Ellipse,
