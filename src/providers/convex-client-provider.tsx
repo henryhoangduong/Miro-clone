@@ -1,6 +1,6 @@
 "use client";
 import { Loading } from "@/components/auth/loading";
-import { ClerkProvider, SignInButton, useAuth } from "@clerk/nextjs";
+import { ClerkProvider, SignInButton, useAuth} from "@clerk/nextjs";
 import {
   Authenticated,
   AuthLoading,
