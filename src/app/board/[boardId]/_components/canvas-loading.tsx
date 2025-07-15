@@ -1,7 +1,7 @@
 import { Loader } from "lucide-react";
-import Info, { InfoSkeleton } from "./info";
+import { InfoSkeleton } from "./info";
 import ParticipantsSkeleton from "./participants";
-import ToolbarSkeleton from "./toolbar";
+import { ToolbarSkeleton } from "./toolbar";
 export const Loading = () => {
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none flex items-center justify-center">
