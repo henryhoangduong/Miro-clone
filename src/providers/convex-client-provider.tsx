@@ -8,7 +8,6 @@ import {
   Unauthenticated,
 } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { Loader2 } from "lucide-react";
 import React from "react";
 interface ConvexClientProviderProps {
   children: React.ReactNode;

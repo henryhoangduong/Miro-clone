@@ -60,12 +60,11 @@ const Info = ({ boardId }: InfoProps) => {
       <TabSeperator />
       <Actions id={data._id} title={data.title} side="bottom" sideOffset={10}>
         <div>
-          <Hint label="Main menu"  side="bottom" sideOffset={10}>
-             <Button size={"icon"} variant={"board"}>
-            <Menu />
-          </Button>
+          <Hint label="Main menu" side="bottom" sideOffset={10}>
+            <Button size={"icon"} variant={"board"}>
+              <Menu />
+            </Button>
           </Hint>
-         
         </div>
       </Actions>
     </div>
