@@ -22,7 +22,7 @@ export const ToolButton = ({
   return (
     <Hint label={label} side="right" sideOffset={14}>
       <Button
-        className=""
+        onClick={onClick}
         disabled={isDisabled}
         variant={isActive ? "boardActive" : "board"}
       >
