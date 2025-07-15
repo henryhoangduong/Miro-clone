@@ -26,7 +26,7 @@ const Participants = () => {
         })}
         {currentUser && (
           <UserAvatar
-              borderColor={connectionIdToColor(currentUser.connectionId)}
+            borderColor={connectionIdToColor(currentUser.connectionId)}
             src={currentUser.info?.picture}
             name={`${currentUser.info?.name} (You)`}
             fallback={currentUser.info?.name?.[0] as string}
