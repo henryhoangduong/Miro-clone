@@ -23,7 +23,14 @@ export const LayerPreview = ({
   }
   switch (layer.type) {
     case LayerType.Rectangle:
-      return <Rectangle id={id} layer={layer} onPointerDown={onLayerPointerDown} selectionColor={selectionColor} />;
+      return (
+        <Rectangle
+          id={id}
+          layer={layer}
+          onPointerDown={onLayerPointerDown}
+          selectionColor={selectionColor}
+        />
+      );
     default:
       console.warn("Unknow layer type");
   }
