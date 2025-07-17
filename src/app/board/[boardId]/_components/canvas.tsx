@@ -6,6 +6,8 @@ import {
   CanvasState,
   Color,
   LayerType,
+  Side,
+  XYWH,
 } from "@/types/canvas";
 import {
   useHistory,
@@ -24,6 +26,7 @@ import { Point } from "@/types/canvas";
 import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./layer-preview";
 import { useOthersMapped } from "@liveblocks/react";
+import { SelectionBox } from "./selction-box";
 interface CanvasProps {
   boardId: string;
 }
@@ -73,6 +76,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     },
     [lastUsedColor],
   );
+  const onResizeHandlePointerDown = useCallback((corner:Side, initialBounds:XYWH) => {
+    history.pause();
+    setCanvasState({
+      mode: CanvasMode.Resizing,
+      initialBounds,
+      corner
+    })
+  },[history])
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
@@ -122,18 +133,24 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     }
     return layerIdsToColorSelection;
   }, [selections]);
-  const onLayerPointerDown = useMutation(({self,setMyPresence},e:React.PointerEvent, layerId:string) => {
-    if (canvasState.mode === CanvasMode.Pencil || canvasState.mode === CanvasMode.Inserting) {
-      return;
-    }
-    history.pause()
-    e.stopPropagation()
-    const point = pointerEventToCanvasPoint(e, camera)
-    if (!self.presence.selection.includes(layerId)) {
-      setMyPresence({selection:[layerId]},{addToHistory:true})
-    }
-    setCanvasState({mode:CanvasMode.Translating, current:point})
-},[setCanvasState, camera, history,canvasState.mode])
+  const onLayerPointerDown = useMutation(
+    ({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
+      if (
+        canvasState.mode === CanvasMode.Pencil ||
+        canvasState.mode === CanvasMode.Inserting
+      ) {
+        return;
+      }
+      history.pause();
+      e.stopPropagation();
+      const point = pointerEventToCanvasPoint(e, camera);
+      if (!self.presence.selection.includes(layerId)) {
+        setMyPresence({ selection: [layerId] }, { addToHistory: true });
+      }
+      setCanvasState({ mode: CanvasMode.Translating, current: point });
+    },
+    [setCanvasState, camera, history, canvasState.mode],
+  );
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
       <Info boardId={boardId} />
@@ -159,12 +176,15 @@ export const Canvas = ({ boardId }: CanvasProps) => {
           }}
         >
           {layerIds.map((layerId) => (
-            <LayerPreview
-              id={layerId}
-              key={layerId}
-              onLayerPointerDown={onLayerPointerDown}
-              selectionColor={layerIdsToColorSelection[layerId]}
-            />
+            <>
+              <LayerPreview
+                id={layerId}
+                key={layerId}
+                onLayerPointerDown={onLayerPointerDown}
+                selectionColor={layerIdsToColorSelection[layerId]}
+              />
+              <SelectionBox onResizeHandlePointerDown={onResizeHandlePointerDown} />
+            </>
           ))}
           <CursorPresence />
         </g>
