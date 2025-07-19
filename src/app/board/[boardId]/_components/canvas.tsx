@@ -31,6 +31,7 @@ import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./layer-preview";
 import { useOthersMapped } from "@liveblocks/react";
 import { SelectionBox } from "./selction-box";
+import { SelectionTools } from "./selection-tools";
 interface CanvasProps {
   boardId: string;
 }
@@ -106,11 +107,11 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     },
     [lastUsedColor],
   );
-  const unSelectLayers = useMutation(({self, setMyPresence}) => {
+  const unSelectLayers = useMutation(({ self, setMyPresence }) => {
     if (self.presence.selection.length > 0) {
-      setMyPresence({selection:[]},{addToHistory:true})
+      setMyPresence({ selection: [] }, { addToHistory: true });
     }
-  },[])
+  }, []);
   const resizeSelectedLayer = useMutation(
     ({ storage, self }, point: Point) => {
       if (canvasState.mode !== CanvasMode.Resizing) {
@@ -181,7 +182,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         canvasState.mode === CanvasMode.None ||
         canvasState.mode === CanvasMode.Pressing
       ) {
-        unSelectLayers()
+        unSelectLayers();
         setCanvasState({
           mode: CanvasMode.None,
         });
@@ -194,7 +195,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         history.resume();
       }
     },
-    [camera, canvasState, history, insertLayer,unSelectLayers],
+    [camera, canvasState, history, insertLayer, unSelectLayers],
   );
   const selections = useOthersMapped((other) => other.presence.selection);
 
@@ -238,6 +239,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         undo={history.redo}
         redo={history.undo}
       />
+      <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor} />
       <svg
         onWheel={onWheel}
         onPointerMove={onPointerMove}
